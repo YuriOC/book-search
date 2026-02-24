@@ -3,10 +3,8 @@ package io.github.yuri.book_search.models;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.List;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record BookData(@JsonAlias("title") String titulo,
-                       @JsonAlias("download_count") Integer sumario
-                       ) {
+public record AuthorsDTO(@JsonAlias("name") String name,
+                         @JsonAlias("birth_year") Integer birth,
+                         @JsonAlias("death_year") Integer death) {
 }
