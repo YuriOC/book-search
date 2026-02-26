@@ -4,23 +4,31 @@ import java.util.List;
 
 public class Book {
     private String titulo;
-    private List<Authors> autores;
-    private List<String> idiomas;
+    private Authors autores;
+    private String idiomas;
     private Integer downloads;
 
     public Book (BookDTO bookDTO){
         this.titulo = bookDTO.titulo();
         this.autores = bookDTO.autores()
                 .stream()
+                .findFirst()
                 .map(Authors::new)
-                .toList();
-        this.idiomas = bookDTO.idiomas();
+                .orElse(null);
+        this.idiomas = bookDTO.idiomas()
+                .stream()
+                .findFirst()
+                .orElse(null);
         this.downloads = bookDTO.downloads();
+    }
+
+    public Authors getAutores() {
+        return autores;
     }
 
     @Override
     public String toString() {
         return
-                "titulo: " + titulo + ", autores: " + autores + ", idiomas: " + idiomas + ", downloads: " + downloads;
+                "titulo: " + titulo + ", autor: " + autores + ", idioma: " + idiomas + ", downloads: " + downloads + '\'';
     }
 }

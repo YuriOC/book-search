@@ -11,6 +11,18 @@ public class Authors {
         this.death = authorsDTO.death();
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Integer getBirth() {
+        return birth;
+    }
+
+    public Integer getDeath() {
+        return death;
+    }
+
     @Override
     public String toString() {
         return "name: " + name +
