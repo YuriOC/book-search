@@ -1,7 +1,5 @@
 package io.github.yuri.book_search.services;
 
-import io.github.yuri.book_search.models.BookResultsDTO;
-
 import java.util.List;
 
 public interface IDataConvercy {

@@ -3,20 +3,22 @@ package io.github.yuri.book_search.main;
 import io.github.yuri.book_search.models.Authors;
 import io.github.yuri.book_search.models.Book;
 import io.github.yuri.book_search.models.BookResultsDTO;
+import io.github.yuri.book_search.repository.BookRepository;
 import io.github.yuri.book_search.services.DataConvercy;
 import io.github.yuri.book_search.services.DataFromAPI;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class Main {
-    private DataFromAPI api = new DataFromAPI();
+    private final DataFromAPI api = new DataFromAPI();
     private final String ENDERECO = "http://gutendex.com/books?search=";
-    private DataConvercy convercy = new DataConvercy();
-    private Scanner scanner = new Scanner(System.in);
-    private List<Book> ResultList = new ArrayList<>();
+    private final DataConvercy convercy = new DataConvercy();
+    private final Scanner scanner = new Scanner(System.in);
+    private final BookRepository repository;
+
+    public Main(BookRepository repository) {
+        this.repository = repository;
+    }
 
     public void test() {
 
@@ -62,7 +64,7 @@ public class Main {
     }
 
     private void showBooks() {
-        ResultList.forEach(System.out::println);
+        repository.findAll().forEach(System.out::println);
     }
 
     public void searchBook(String userInput) {
@@ -78,19 +80,19 @@ public class Main {
         if (book == null) {
             System.out.println("Book not found");
         } else {
-            ResultList.add(book);
+            repository.save(book);
             System.out.println(book);
         }
     }
 
     public void showAuthors() {
-        ResultList.stream()
+        repository.findAll().stream()
                 .map(Book::getAutores)
                 .forEach(System.out::println);
     }
 
     public void showAliveAuthors(Integer authoryear) {
-        ResultList.stream().filter(book -> {
+        repository.findAll().stream().filter(book -> {
             Authors autores = book.getAutores();
 
             return autores.getDeath() == null || autores.getDeath() > authoryear;

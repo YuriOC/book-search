@@ -4,7 +4,6 @@ package io.github.yuri.book_search.services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.yuri.book_search.models.BookResultsDTO;
 
 import java.util.List;
 
